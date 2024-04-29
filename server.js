@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { sendMailRouter } from "./router/sendMailRouter.js";
-import { receiveMailRouter } from "./router/receiveMailRouter.js";
+import { mailRouter } from "./router/mailRouter.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
@@ -11,7 +10,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/mail", sendMailRouter, receiveMailRouter);
+app.use("/mail", mailRouter);
 
 app.use("*", (req, res) => res.sendStatus(404));
 
