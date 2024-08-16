@@ -1,6 +1,7 @@
 import { ErrorResponse } from "../utils/ErrorResponse.js";
 
 export const validateJoi = (schema) => (req, res, next) => {
+  console.log(req);
   const dataToValidate = {
     params: req.params,
     body: req.body,
@@ -15,7 +16,7 @@ export const validateJoi = (schema) => (req, res, next) => {
           statusMessage: "Bad Request",
           errorType: "BadRequestError",
           errorCode: "VAL_DATA_VALIDATION_001",
-        })
+        }),
       )
     : next();
 };

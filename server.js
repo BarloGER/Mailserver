@@ -4,7 +4,7 @@ import { mailRouter } from "./router/mailRouter.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
-const PORT = 8080;
+const PORT = 8081;
 
 app.use(cors({ origin: "*" }));
 app.use(express.json());

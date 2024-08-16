@@ -2,7 +2,7 @@ import { transporter } from "../config/transporterConfig.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ErrorResponse } from "../utils/ErrorResponse.js";
 
-const myEmailAddress = process.env.USER;
+const myEmailAddress = process.env.APP_USER;
 const MAX_RETRIES = 3;
 // Queue for mails, if there is capacity, added emails will be send from here
 const mailQueue = [];
@@ -20,7 +20,7 @@ const sendEmailsFromQueue = () => {
         } else {
           console.error(
             "Max retries reached, giving up on this mail:",
-            mailOptions
+            mailOptions,
           );
           // Generation of an ErrorResponse in the event of final failure
           const errorResponse = new ErrorResponse({
@@ -52,6 +52,7 @@ if (transporter.isIdle() && mailQueue.length > 0) {
 
 export const sendMail = asyncHandler(async (req, res) => {
   const { email, subject, html } = req.body;
+  console.log(req.body);
   const mailOptions = {
     from: myEmailAddress,
     to: email,
